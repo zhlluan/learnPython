@@ -23,3 +23,5 @@ elif quadratic(1, 3, -4) != (1.0, -4.0):
     print('Test Fail')
 else:
     print('Test Pass')
+
+#quadratic(2,2,1)
