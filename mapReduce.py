@@ -54,3 +54,31 @@ if abs(str2float('123.456') - 123.456) < 0.00001:
     print('测试成功!')
 else:
     print('测试失败!')
+
+
+### 4 字符串转浮点数的方法二
+CHAR_TO_FLOAT = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '.': -1}
+
+def string2float(s):
+	digits = map(lambda ch:CHAR_TO_FLOAT[ch], s)
+	point = 0
+
+	def to_float(f,n):
+		nonlocal point
+		if n==-1:
+			point = 1
+			return f
+		if point == 0:
+			return f*10+n
+		else:
+			point = point * 10
+			return f+n/point
+
+	return reduce(to_float, digits, 0.0)
+
+print(string2float('0'))
+print(string2float('123.456'))
+print(string2float('123.45600'))
+print(string2float('0.1234'))   #结果为0.12340000000000001  原因在于 0.1+0.02 = 0.12000000000000001
+print(string2float('.1234'))    #结果为0.12340000000000001  原因在于 0.1+0.02 = 0.12000000000000001
+print(string2float('120.0034'))
